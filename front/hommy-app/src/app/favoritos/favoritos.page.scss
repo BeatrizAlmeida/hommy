@@ -1,0 +1,33 @@
+.welcome-card{
+    max-height:35vh ;
+    overflow: hidden;
+}
+.imgRepublica{
+    height: 22vh;
+    width: 40vw;
+    display: block;
+    float: left;
+    margin-right: 2%;
+}
+.saibaMais{
+    display: block;
+    float: right;
+    font-size: 1em;
+    color: #cd5360;
+}
+.title{
+    color: #cd5360;
+    text-align: center;
+}
+.title.sub{
+    color:#3D9CCC ;
+    font-size: medium;
+}
+p{
+    text-align: justify;
+}
+h2{
+    text-align: center;
+    color: red;
+}
+
