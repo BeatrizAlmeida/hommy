@@ -1,11 +1,16 @@
+h1{
+    text-align: center;
+    font-weight: 300;
+}
 h2{
     text-align: center;
-    font-size: larger;
+    font-size: x-large;
     color: #cd5360;
+    font-weight: bold;
 }
 img{
     height: 25vh;
-    width: 65vw;
+    width: 68vw;
 }
 p{
     text-align: center;
@@ -13,4 +18,10 @@ p{
 ion-slides{
     --bullet-background: primary;
     --bullet-background-active: #cd5360;
+}
+.preco{
+    color: blueviolet;
+}
+ion-content{
+    --background:#f6efa6 ;
 }
