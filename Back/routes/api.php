@@ -31,9 +31,9 @@ Route::delete('deleteRepublic/{id}', 'RepublicController@deleteRepublic');
 Route::post('createRepublic', 'RepublicController@createRepublic');
 Route::get('showRepublic/{id}', 'RepublicController@showRepublic');
 Route::get('listRepublic', 'RepublicController@listRepublic');
-//Relação de República com Locador 
-Route::put('addRepublic/{locator_id}/{republic_id}', 'RepublicController@addRepublic');
-Route::delete('removeRepublic/{locator_id}/{republic_id}', 'RepublicController@removeRepublic');
+//Relação de República com Locador - Anunciar
+Route::put('addRepublic/{locator_id}/{republic_id}', 'LocatorController@addRepublic');
+Route::delete('removeRepublic/{locator_id}/{republic_id}', 'LocatorController@removeRepublic');
 
 
 //Rotas Locatário
@@ -42,6 +42,15 @@ Route::get('showTenant/{id}', 'TenantController@showTenant');
 Route::get('listTenant', 'TenantController@listTenant');
 Route::put('updateTenant/{id}', 'TenantController@updateTenant');
 Route::delete('deleteTenant/{id}', 'TenantController@deleteTenant');
+//Alugar república
+Route::put('rent/{id}/{republic_id}', 'TenantController@rent');
+Route::delete('undoRent/{id}/{republic_id}', 'TenantController@undoRent');
+
+//Favoritar República
+Route::put('favoritar/{id}/{republic_id}', 'TenantController@favoritar');
+Route::delete('desfavoritar/{id}/{republic_id}', 'TenantController@desfavoritar');
+
+
 
 //Relação de Locatário com Comentários
 Route::put('addComment/{id}/{comment_id}', 'TenantController@addComment');

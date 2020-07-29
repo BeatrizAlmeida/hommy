@@ -73,7 +73,22 @@ class LocatorController extends Controller
         $republic->anunciar($locator_id);
         return response()->json($republic);
     }
-    
+    //Locador anuncia
+    public function addRepublic($locator_id, $republic_id){
+        $locator= Locator::findOrFail($locator_id);
+        $republic = Republic::findOrFail($republic_id);
+        $republic->locator_id =$locator_id;
+        $republic->save();
+        return response()->json($republic);
+    }
+
+    //Locador remove anúncio
+    public function removeRepublic($locator_id, $republic_id){
+        $locator= Locator::findOrFail($locator_id);
+        $republic = Republic::findOrFail($republic_id);
+        $republic = new RepublicController;
+        return $republic->deleteRepublic($republic_id);
+    }
    
 
 }

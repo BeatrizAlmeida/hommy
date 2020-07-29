@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TenantRequest;
 use App\Tenant;
 use App\Comment;
+use App\Republic;
+
 
 class TenantController extends Controller
 {
@@ -54,6 +56,16 @@ class TenantController extends Controller
         $tenant = Tenant::findOrFail($tenant_id);
         $tenant->rent($republic_id);
         return response()->json($tenant);
+    }
+    public function undoRent($tenant_id, $republic_id){
+        $tenant = Tenant::findOrFail($tenant_id);
+        $tenant->republic_id = NULL;
+        $tenant->save();
+        $republic = Republic::findOrFail($republic_id);
+        $republic->tenant_id = NULL;
+        $republic->save();
+        return response()->json($tenant);
+
     }
 
     public function addComment($id, $comment_id){

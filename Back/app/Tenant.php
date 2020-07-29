@@ -12,6 +12,8 @@ class Tenant extends Model
     public function rent( $republic_id){
         $republic = Republic::findOrFail($republic_id);
         $this->republic_id = $republic_id;
+        $republic->tenant_id= $this->id;
+        $republic->save();
         $this->save();
     }
 

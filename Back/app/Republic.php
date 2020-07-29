@@ -93,4 +93,5 @@ class Republic extends Model
         $this->locator_id= $locator_id;
         $this->save();
     }
+
 }
