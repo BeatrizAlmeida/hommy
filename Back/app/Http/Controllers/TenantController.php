@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\TenantRequest;
 use App\Tenant;
 use App\Comment;
 
 class TenantController extends Controller
 {
-    public function createTenant (Request $request) {
+    public function createTenant (TenantRequest $request) {
         $tenant = new Tenant;
         $tenant->name = $request->name;
         $tenant->password = $request->password;
         $tenant->email = $request->email;
         $tenant->save();
+        return response()->json($tenant);
 
     }
     public function showTenant ($id){
@@ -26,7 +28,7 @@ class TenantController extends Controller
         return response()->json([$tenant]);
     }
 
-    public function updateTenant( Request $request,$id ){
+    public function updateTenant( TenantRequest $request,$id ){
         $tenant= Tenant::findOrFail($id);
         if($request->name){
             $tenant->name = $tenant->name;
@@ -48,7 +50,11 @@ class TenantController extends Controller
 
     }
 
-
+    public function rent($tenant_id, $republic_id){
+        $tenant = Tenant::findOrFail($tenant_id);
+        $tenant->rent($republic_id);
+        return response()->json($tenant);
+    }
 
     public function addComment($id, $comment_id){
         $tenant= Tenant::findOrFail($id);
@@ -64,6 +70,17 @@ class TenantController extends Controller
         $comment->tenant_id =NULL;
         $comment->save();
         return response()->json($comment);
+    }
+
+    public function favoritar($tenant_id, $republic_id){
+        $tenant = Tenant::findOrFail($tenant_id);
+        $tenant->favorites()->attach($republic_id);
+        return response()->json($tenant);
+    }
+    public function desfavoritar($tenant_id, $republic_id){
+        $tenant = Tenant::findOrFail($tenant_id);
+        $tenant->favorites()->detach($republic_id);
+        return response()->json($tenant);
     }
 
 }

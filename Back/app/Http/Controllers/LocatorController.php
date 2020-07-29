@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\LocatorRequest;
 use App\Locator;
 use App\Republic;
 
+
 class LocatorController extends Controller
 {
-    public function createLocator (Request $request) {
+    
+    public function createLocator (LocatorRequest $request) {
+        
         $locator = new Locator;
         $locator->name = $request->name;
         $locator->password = $request->password;
@@ -17,6 +22,8 @@ class LocatorController extends Controller
         $locator->phoneNumber = $request->phoneNumber;
         $locator->phoneOpcional = $request->phoneOpcional;
         $locator->save();
+        return response()->json($locator);
+
     }
 
     public function showLocator ($id){
@@ -29,7 +36,7 @@ class LocatorController extends Controller
         return response()->json([$locator]);
     }
 
-    public function updateLocator( Request $request,$id ){
+    public function updateLocator( LocatorRequest $request,$id ){
         $locator= Locator::findOrFail($id);
         if($request->name){
             $locator->name = $request->name;
@@ -61,6 +68,11 @@ class LocatorController extends Controller
 
     }
 
+    public function anunciar($locator_id, $republic_id){
+        $republic = Republic::findOrFail($republic_id);
+        $republic->anunciar($locator_id);
+        return response()->json($republic);
+    }
     
    
 
