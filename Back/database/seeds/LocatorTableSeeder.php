@@ -18,7 +18,7 @@ class LocatorTableSeeder extends Seeder
         
         factory (App\Locator::class,5)->create()->each(function($locator){
             $republics= factory(App\Republic::class,1)->make();
-            $locator->addRepublic()->saveMany($republics);
+            $locator->Republic()->saveMany($republics);
         });
     }
 }

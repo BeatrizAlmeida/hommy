@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Tenant;
 use App\Republic;
+use App\Comment;
 use Faker\Generator as Faker;
 class TenantTableSeeder extends Seeder
 {
@@ -15,7 +16,9 @@ class TenantTableSeeder extends Seeder
     {
         factory (App\Tenant::class,5)->create()->each(function($tenant){
             $republics= factory(App\Republic::class,1)->make();
-            $republics->tenants()->attach($tenant);
+            $republics->tenantFavorites()->attach($tenant);
+            $comments= factory(App\Comment::class,2)->make();
+            $tenant->Comment()->saveMany($comments);
         });
 
     }
