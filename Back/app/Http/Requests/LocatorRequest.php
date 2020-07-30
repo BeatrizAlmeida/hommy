@@ -30,9 +30,9 @@ class LocatorRequest extends FormRequest
             return [
                 'name'=>'required|string|alpha',
                 'email'=>'required|email|unique:locators,email',
-                'phoneNumber'=>'required|numeric|celular_com_ddd',
+                'phoneNumber'=>'required|celular_com_ddd',
                 'password'=>'required',
-                'cpf'=>'required|unique:locators,cpf|formato_cpf',
+                'cpf'=>'required|unique:locators,cpf|cpf',
                 'phoneOpcional'=>'numeric|telefone_com_ddd',
 
             ];
@@ -41,8 +41,8 @@ class LocatorRequest extends FormRequest
             return [
                 'name'=>'string|alpha',
                 'email'=>'email|unique:locators,email',
-                'phoneNumber'=>'numeric|celular_com_ddd',
-                'cpf'=>'unique:locators,cpf|formato_cpf',
+                'phoneNumber'=>'celular_com_ddd',
+                'cpf'=>'unique:locators,cpf|cpf',
                 'phoneOpcional'=>'numeric|telefone_com_ddd',
                 
             ];
