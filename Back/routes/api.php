@@ -50,6 +50,11 @@ Route::delete('undoRent/{id}/{republic_id}', 'TenantController@undoRent');
 Route::put('favoritar/{id}/{republic_id}', 'TenantController@favoritar');
 Route::delete('desfavoritar/{id}/{republic_id}', 'TenantController@desfavoritar');
 
+//Para pesquisar com filtro Repúblicas
+Route::get('search', 'RepublicController@search');
+//Para mostrar as repúblicas deletadas
+Route::get('deletedSoft', 'RepublicController@deletedSoft');
+
 
 
 //Relação de Locatário com Comentários
@@ -63,3 +68,6 @@ Route::get('showComment/{id}', 'CommentController@showComment');
 Route::get('listComment', 'CommentController@listComment');
 Route::put('updateComment/{id}', 'CommentController@updateComment');
 Route::delete('deleteComment/{id}', 'CommentController@deleteComment');
+
+
+Route::post('register', 'API\PassportController@register');

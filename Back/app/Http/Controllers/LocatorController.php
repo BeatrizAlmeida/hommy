@@ -15,13 +15,7 @@ class LocatorController extends Controller
     public function createLocator (LocatorRequest $request) {
         
         $locator = new Locator;
-        $locator->name = $request->name;
-        $locator->password = $request->password;
-        $locator->email = $request->email;
-        $locator->cpf = $request->cpf;
-        $locator->phoneNumber = $request->phoneNumber;
-        $locator->phoneOpcional = $request->phoneOpcional;
-        $locator->save();
+        $locator = createLocator($request);
         return response()->json($locator);
 
     }

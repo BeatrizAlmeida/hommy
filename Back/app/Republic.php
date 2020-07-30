@@ -8,6 +8,7 @@ use App\Comment;
 use App\Http\Requests\RepublicRequest;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+Use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Republic extends Model
 {
@@ -93,5 +94,6 @@ class Republic extends Model
         $this->locator_id= $locator_id;
         $this->save();
     }
+    use SoftDeletes;
 
 }

@@ -49,5 +49,24 @@ class RepublicController extends Controller
         $republic  = Republic::findOrFail($id);
         return response()->json($republic->locator_id);
     }
+
+    public function search(Request $request){
+        $queryRepublic= Republic::query();
+        if($request->price){
+            $queryRepublic->where('price','<=',$request->price);
+        }
+        if($request->name){
+            $queryRepublic->where('name','LIKE',$request->name);
+        }
+        $search=$queryRepublic->get();
+        return response()->json($search);
+        
+    }
+
+    public function deletedSoft(){
+        $query= Republic::onlyTrashed()->get();
+        return response()->json($query);
+        
+    }
 }
 

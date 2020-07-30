@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Republic;
 use App\Comment;
+use Laravel\Passport\HasApiTokens;
+
 
 
 class Tenant extends Model
@@ -28,4 +30,6 @@ class Tenant extends Model
     public function favorites(){
         return $this->belongsToMany('App\Republic');
     }
+
+    use HasApiTokens;
 }
