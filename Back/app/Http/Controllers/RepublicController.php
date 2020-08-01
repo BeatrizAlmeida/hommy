@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RepublicRequest;
 use App\Republic;
 use App\Locator;
+use App\Http\Resources\Republics as RepublicResource;
+
 
 class RepublicController extends Controller
 {
@@ -18,12 +20,11 @@ class RepublicController extends Controller
 
     public function showRepublic ($id){
         $republic= Republic::findOrFail($id);
-        return response()->json($republic);
+        return response()->json( new RepublicResource($republic));
     }
     
     public function listRepublic (){
-        $republic = Republic::all();
-        return response()->json([$republic]);
+        return response()->json(Republic::paginate(2));
     }
 
     public function updateRepublic( RepublicRequest $request,$id ){
@@ -58,8 +59,15 @@ class RepublicController extends Controller
         if($request->name){
             $queryRepublic->where('name','LIKE',$request->name);
         }
+        if($request->comment){
+            $queryRepublic = Republic::has('comment','>=',$request->comment);
+        }
         $search=$queryRepublic->get();
-        return response()->json($search);
+        $ids=$search->pluck('id');
+        $paginator=Republic::wherein('id',$ids)->paginate(3);
+        $republics= RepublicResource::collection($paginator);
+        $last = $republics->lastPage();
+        return response()->json([$paginator,$last] );
         
     }
 

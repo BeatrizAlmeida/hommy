@@ -13,6 +13,8 @@ class CommentController extends Controller
         $comment->tenant_id = $request->tenant_id;
         $comment->republic_id = $request->republic_id;        
         $comment->save();
+        return response()->json($comment);
+
     }
 
     public function showComment ($id){
